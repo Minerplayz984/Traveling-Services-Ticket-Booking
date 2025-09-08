@@ -16,7 +16,7 @@ namespace Traveling_Services_Ticket_Booking
                 Customer customer = (Customer)p;
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("=======================================\nCustomer's info:\nName: {0}\nE-mail: {1}\nPhone number: {2}\nUsername: {3}\nPassword: {4}\nCustomer ID: {5}\n=======================================\n", customer.name,customer.email,customer.phone,p.username,customer.password,customer.customerID);
-                Console.Write("Actions:\n1-Search for a flight\n2-Book a flight\n3-Book a taxi\n4-Book a hotel room\n5-Check booking status\n6-Cancel taxi booking\n7-Cancel flight booking\n8-Cancel hotel room booking\n9-Generate a flying ticket\n");
+                Console.Write("Actions:\n1-Search for a flight\n2-Book a flight\n3-Book a taxi\n4-Book a hotel room\n5-Check booking status\n6-Cancel taxi booking\n7-Cancel flight booking\n8-Cancel hotel room booking\n9-Generate a flying ticket\n10-Return to main menu\n");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("Choose your action: ");
@@ -51,6 +51,7 @@ namespace Traveling_Services_Ticket_Booking
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Booking ID not found or you are not authorized to cancel this booking");
                             Console.ResetColor();
+                            ShowLoginMenu(p);
                             return;
                         }
                         taxiBooking.cancelBooking(p);
@@ -67,6 +68,7 @@ namespace Traveling_Services_Ticket_Booking
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Booking ID not found or you are not authorized to cancel this booking");
                             Console.ResetColor();
+                            ShowLoginMenu(p);
                             return;
                         }
                         flightBooking.cancelBooking(p);
@@ -83,6 +85,7 @@ namespace Traveling_Services_Ticket_Booking
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Booking ID not found or you are not authorized to cancel this booking");
                             Console.ResetColor();
+                            ShowLoginMenu(p);
                             return;
                         }
                         hotelBooking.cancelBooking(p);
@@ -99,16 +102,21 @@ namespace Traveling_Services_Ticket_Booking
                             Console.ForegroundColor = ConsoleColor.Red;
                             Console.WriteLine("Booking ID not found or you are not authorized to generate ticket for this booking");
                             Console.ResetColor();
+                            ShowLoginMenu(p);
                             return;
                         }
                         flightBooking2.generateTicket();
                         break;
+                    case 10:
+                        Menu();
+                        return;
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Choose a number between 1 and 9 !!");
+                        Console.WriteLine("Choose a number between 1 and 10 !!");
                         Console.ResetColor();
-                        break;
+                        ShowLoginMenu(p);
+                        return;
                 }
             }
             if (p is HotelOwner)
@@ -125,7 +133,7 @@ namespace Traveling_Services_Ticket_Booking
                 }
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("Actions:\n1-Register a hotel\n2-Update hotel details\n3-Remove a hotel\n");
+                Console.Write("Actions:\n1-Register a hotel\n2-Update hotel details\n3-Remove a hotel\n4-Return to main menu\n");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("Choose your action: ");
@@ -142,12 +150,16 @@ namespace Traveling_Services_Ticket_Booking
                     case 3:
                         hotelOwner.removeHotel();
                         break;
+                    case 4:
+                        Menu();
+                        return;
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Choose a number between 1 and 3 !!");
+                        Console.WriteLine("Choose a number between 1 and 4 !!");
                         Console.ResetColor();
-                        break;
+                        ShowLoginMenu(p);
+                        return;
                 }
             }
             if (p is TaxiDriver)
@@ -165,7 +177,7 @@ namespace Traveling_Services_Ticket_Booking
                 Console.WriteLine("=======================================");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("Actions:\n1-Update availability\n2-Accept a booking\n");
+                Console.Write("Actions:\n1-Update availability\n2-Accept a booking\n3--Return to main menu\n");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("Choose your action: ");
@@ -179,12 +191,16 @@ namespace Traveling_Services_Ticket_Booking
                     case 2:
                         taxiDriver.acceptBooking();
                         break;
+                    case 3:
+                        Menu();
+                        return;
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Choose a number between 1 and 2 !!");
+                        Console.WriteLine("Choose a number between 1 and 3 !!");
                         Console.ResetColor();
-                        break;
+                        ShowLoginMenu(p);
+                        return;
                 }
             }
             if (p is AirlineAdmin)
@@ -192,7 +208,7 @@ namespace Traveling_Services_Ticket_Booking
                 AirlineAdmin airlineAdmin = (AirlineAdmin)p;
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("=======================================\nAirline admin's info:\nName: {0}\nE-mail: {1}\nPhone number: {2}\nUsername: {3}\nPassword: {4}\nAdmin ID: {5}\nAirline name: {6}\n=======================================\n", airlineAdmin.name, airlineAdmin.email, airlineAdmin.phone, airlineAdmin.username, airlineAdmin.password, airlineAdmin.adminID, airlineAdmin.airlineName);
-                Console.Write("Actions:\n1-Add a flight\n2-Update a flight\n3-Cancel a flight\n4-Check Available seats\n");
+                Console.Write("Actions:\n1-Add a flight\n2-Update a flight\n3-Cancel a flight\n4-Check Available seats\n5-Return to main menu\n");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("Choose your action: ");
@@ -212,12 +228,17 @@ namespace Traveling_Services_Ticket_Booking
                     case 4:
                         Flight.checkAvailability();
                         break;
+                    case 5:
+                        Menu();
+                        return;
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Choose a number between 1 and 4 !!");
+                        Console.WriteLine("Choose a number between 1 and 5 !!");
                         Console.ResetColor();
-                        break;
+                        ShowLoginMenu(p);
+                        return;
+                       
                 }
             }
             if (p is SystemAdmin)
@@ -225,7 +246,7 @@ namespace Traveling_Services_Ticket_Booking
                 SystemAdmin systemAdmin = (SystemAdmin)p;
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.Write("=======================================\nSystem admin's info:\nName: {0}\nE-mail: {1}\nPhone number: {2}\nUsername: {3}\nPassword: {4}\n=======================================\n\n", systemAdmin.name, systemAdmin.email, systemAdmin.phone, systemAdmin.username, systemAdmin.password);
-                Console.Write("Actions:\n1-Manage users\n2-Generate reports\n");
+                Console.Write("Actions:\n1-Manage users\n2-Generate reports\n3-Return to main menu\n");
                 Console.ResetColor();
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("Choose your action: ");
@@ -239,12 +260,17 @@ namespace Traveling_Services_Ticket_Booking
                     case 2:
                         systemAdmin.generateReports();
                         break;
+                    case 3:
+                        Menu();
+                        return;
                     default:
                         Console.Clear();
                         Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Choose a number between 1 and 2 !!");
+                        Console.WriteLine("Choose a number between 1 and 3 !!");
                         Console.ResetColor();
-                        break;
+                        ShowLoginMenu(p);
+                        return;
+                        
                 }
             }
         }
@@ -410,9 +436,13 @@ namespace Traveling_Services_Ticket_Booking
         }
         static public void Login()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter username: ");
+            Console.ResetColor();
             string username = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter password: ");
+            Console.ResetColor();
             string password = Console.ReadLine();
             Person ps = persons.Find(p => p.username == username);
             if (ps == null)
@@ -443,15 +473,24 @@ namespace Traveling_Services_Ticket_Booking
         }
         static public void Register()
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter username: ");
+            Console.ResetColor();
             string username = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter password: ");
+            Console.ResetColor();
             string password = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Re-enter password: ");
+            Console.ResetColor();
             string rePassword = Console.ReadLine();
             if(password == rePassword)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Account created successfully !");
+                Console.ResetColor();
                 ShowRegisterMenu(username,password);
             }
             else
@@ -464,19 +503,21 @@ namespace Traveling_Services_Ticket_Booking
         }
         static public void Menu()
         {
+            Console.ForegroundColor= ConsoleColor.Yellow;
             Console.WriteLine("=======================================\nTraveling Services Ticket Booking System\n=======================================");
             Console.WriteLine("1-Login\n2-Register\n3-Exit");
             Console.WriteLine("=======================================");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Choose: ");
+            Console.ResetColor();
             int choice = int.Parse(Console.ReadLine());
             switch (choice)
             {
                 case 1:
-                    Console.Clear();
                     Login();
                     break;
                 case 2:
-                    Console.Clear();
                     Register();
                     break;
                 case 3:
@@ -485,7 +526,9 @@ namespace Traveling_Services_Ticket_Booking
                     break;
                 default:
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Choose a number between 1 and 3 !!");
+                    Console.ResetColor();
                     break;
             }
         }
