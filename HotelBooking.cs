@@ -63,21 +63,32 @@ namespace Traveling_Services_Ticket_Booking
             this.room.bookRoom();
             this.status = "Confirmed";
             this.date = DateTime.Now;
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Enter check-in date (yyyy-mm-dd): ");
+            Console.ResetColor();
             this.checkInDate = DateTime.Parse(Console.ReadLine());
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Enter check-out date (yyyy-mm-dd): ");
+            Console.ResetColor();
             this.checkOutDate = DateTime.Parse(Console.ReadLine());
             int ID = new Random().Next(1001, 9999);
             this.bookingID = ("HBK" + ID);
             HotelBooking.hotelBookings.Add(this);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Hotel booking confirmed with ID: {0}", this.bookingID);
+            Console.ResetColor();
+
         }
         public override void cancelBooking(Person customer)
         {
             HotelBooking.hotelBookings.Remove(this);
             this.status = "Cancelled";
             this.room.freeRoom();
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Hotel booking with ID: {0} was successfully cancelled", this.bookingID);
+            Console.ResetColor();
         }
 
     }

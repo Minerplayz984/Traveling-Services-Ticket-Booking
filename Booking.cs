@@ -61,11 +61,11 @@ namespace Traveling_Services_Ticket_Booking
 
         public virtual void confirmBooking(Person p)
         {
-
+            //virtual method
         }
         public virtual void cancelBooking(Person customer)
         {
-
+            //virtual method
         }
     }
 }

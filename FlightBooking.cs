@@ -25,16 +25,25 @@ namespace Traveling_Services_Ticket_Booking
         {
             if (this.status != "Confirmed")
             {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Cannot generate ticket, Booking not confirmed");
+                Console.ResetColor();
                 return;
             }
-            Console.WriteLine("\n==============================\n         FLIGHT TICKET        \n==============================\nBooking ID: {0}\nCustomer name: {1}\nAir line: {8}\nFlight ID: {2}\nFrom: {3}\nTo: {4}\nDeparture time: {5}\nArrival time: {9}\nStatus: {6}\nIssued on: {7}\n==============================\n",this.bookingID,this.customer.name,this.flight.flightID,this.flight.origin,this.flight.destination,this.flight.departureTime,this.status,this.date,this.flight.airline,this.flight.arrivalTime);                                                   
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.WriteLine("\n==============================\n         FLIGHT TICKET        \n==============================\nBooking ID: {0}\nCustomer name: {1}\nAir line: {8}\nFlight ID: {2}\nFrom: {3}\nTo: {4}\nDeparture time: {5}\nArrival time: {9}\nStatus: {6}\nIssued on: {7}\n==============================\n",this.bookingID,this.customer.name,this.flight.flightID,this.flight.origin,this.flight.destination,this.flight.departureTime,this.status,this.date,this.flight.airline,this.flight.arrivalTime);
+            Console.ResetColor();
         }
         public override void confirmBooking(Person customer)
         {
-            if(this.flight.availableSeats <= 0)
+            if (!this.flight.reserveSeat())
             {
-                Console.WriteLine("No available seats on this flight. Booking Failed.");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Booking failed !, No seats available on flight with ID: {0}",this.flight.flightID);
+                Console.ResetColor();
                 return;
             }
             this.customer = (Customer)customer;
@@ -43,8 +52,11 @@ namespace Traveling_Services_Ticket_Booking
             int ID = new Random().Next(1001, 9999);
             this.bookingID = ("FBK" + ID);
             FlightBooking.flightBookings.Add(this);
-            this.flight.availableSeats -= 1;
-            Console.WriteLine("Flight booking confirmed with ID: {0}",this.bookingID);
+            
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Flight booking confirmed with booking ID: {0} on flight with ID: {1}",this.bookingID,this.flight.flightID);
+            Console.ResetColor();
         }
         public override void cancelBooking(Person customer)
         {
@@ -55,7 +67,10 @@ namespace Traveling_Services_Ticket_Booking
                 this.flight.availableSeats += 1;
             }
             FlightBooking.flightBookings.Remove(this);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Flight booking with ID: {0} was successfully cancelled",this.bookingID);
+            Console.ResetColor();
         }
     }
 }

@@ -242,44 +242,63 @@ namespace Traveling_Services_Ticket_Booking
                     }
                     else
                     {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("=======================================\nFlight Booking ID: {0}\nCustomer: {1}\nFlight ID: {2}\nAirline: {3}\nOrigin: {4}\nDestination: {5}\nDeparture time: {6}\nArrival time: {7}\nPrice: {8}\nBooking Status: {9}\n=======================================", fb.bookingID, fb.customer.name, fb.flight.flightID, fb.flight.airline, fb.flight.origin, fb.flight.destination, fb.flight.departureTime, fb.flight.arrivalTime, fb.flight.price, fb.status);
+                        Console.ResetColor();
                     }
                     break;
                 case 2:
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write("Your taxi booking ID:");
+                    Console.ResetColor();
                     string tbID = Console.ReadLine();
                     TaxiBooking tb = TaxiBooking.taxiBookings.Find(t => t.bookingID == tbID && t.customer.username == p.username);
                     if (tb == null)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("No taxi booking exists with this booking ID !!");
+                        Console.ResetColor();
                         return;
                     }
                     else
                     {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("=======================================\nTaxi Booking ID: {0}\nCustomer: {1}\nDriver ID: {2}\nDriver Name: {3}\nAvailable time: {4}\nPrice per Km: {5}\nBooking Status: {6}\n=======================================", tb.bookingID, tb.customer.name, tb.taxi.taxiDriver.driverID, tb.taxi.taxiDriver.name, tb.taxi.availableTime, tb.taxi.pricePerKm, tb.status);
+                        Console.ResetColor();
                     }
                     break;
                 case 3:
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write("Your hotel booking ID:");
+                    Console.ResetColor();
                     string hbID = Console.ReadLine();
                     HotelBooking hb = HotelBooking.hotelBookings.Find(h => h.bookingID == hbID && h.customer.username == p.username);
                     if (hb == null)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("No hotel booking exists with this booking ID !!");
+                        Console.ResetColor();
                         return;
                     }
                     else
                     {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         Console.WriteLine("=======================================\nHotel Booking ID: {0}\nCustomer: {1}\nHotel ID: {2}\nHotel name: {3}\nRoom ID: {4}\nRoom type: {5}\nPrice: {6}\nBooking Status: {7}\n=======================================", hb.bookingID, hb.customer.name, hb.hotel.hotelID, hb.hotel.name, hb.room.roomID, hb.room.roomType, hb.room.price, hb.status);
+                        Console.ResetColor();
                     }
                     break;
                 default:
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Choose a number between 1 and 3 !!");
+                    Console.ResetColor();
                     Program.ShowLoginMenu(p);
                     break;
             }

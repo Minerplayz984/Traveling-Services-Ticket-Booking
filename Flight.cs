@@ -109,35 +109,35 @@ namespace Traveling_Services_Ticket_Booking
 
         public static void checkAvailability()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter flight ID: ");
+            Console.Clear();
             string id = Console.ReadLine();
             Flight flight = flights.Find(f => f.flightID == id);
             if (flight == null)
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Flight with this ID might have been cancelled or doesn't exist!!");
+                Console.ResetColor();
                 return;
             }
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Available seats for flight ID {0}: {1}", flight.flightID, flight.availableSeats);
+            Console.ResetColor();
         }
-        public void reserveSeat(Flight fs)
+        public bool reserveSeat()
         {
-            string id =fs.flightID;
-            Flight flight = flights.Find(f => f.flightID == id);
-            if (flight == null)
+            if (this.availableSeats > 0)
             {
-                Console.Clear();
-                Console.WriteLine("Flight with this ID might have been cancelled or doesn't exist!!");
-                return;
-            }
-            if (flight.availableSeats > 0)
-            {
-                flight.availableSeats--;
-                Console.WriteLine("Seat reserved successfully on flight ID {0} , Remaining seats: {1}", flight.flightID, flight.availableSeats);
+                this.availableSeats--;
+                return true;
             }
             else
             {
-                Console.WriteLine("No available seats on flight ID {0}.", flight.flightID);
+                return false;
             }
         }
     }

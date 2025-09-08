@@ -10,40 +10,64 @@ namespace Traveling_Services_Ticket_Booking
     {
         public void manageUsers()
         {
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("=======================================\nManage users:\n1-Delete a user\n2-Change a password\n3-List all users\n=======================================");
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Choose: ");
+            Console.ResetColor();
             int choice = int.Parse(Console.ReadLine());
+            Console.Clear();
             switch (choice)
             {
                 case 1:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write("Enter username of the user you want to delete: ");
+                    Console.ResetColor();
                     string username = Console.ReadLine();
                     Person person = Program.persons.Find(p => p.username == username);
                     if ((person == null)||(person is SystemAdmin) )
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("User doesn't exist or maybe a system admin!!");
+                        Console.ResetColor();
                         return;
                     }
                     Program.persons.Remove(person);
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("User with username: {0} was successfully deleted", username);
+                    Console.ResetColor();
                     break;
                     case 2:
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write("Enter username of the user you want to change password: ");
+                    Console.ResetColor();
                     string usern = Console.ReadLine();
                     Person per = Program.persons.Find(p => p.username == usern);
                     if (per == null)
                     {
                         Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("User doesn't exist!!");
+                        Console.ResetColor();
                         return;
                     }
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write("Enter new password: ");
+                    Console.ResetColor();
                     per.password = Console.ReadLine();
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Password was successfully changed for user with username: {0}", usern);
+                    Console.ResetColor();
                     break;
                     case 3:
+                    Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("List of all users:");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.Magenta;
                     foreach (Person p in Program.persons)
                     {
                         if(p is SystemAdmin) continue; 
@@ -68,6 +92,8 @@ namespace Traveling_Services_Ticket_Booking
                             Console.WriteLine("=======================================\nAirline Admin {0} \nAdmin ID: {4}\nName: {0}\nEmail: {1}\nPhone: {2}\nUsername: {3}\n", airlineAdmin.name, airlineAdmin.email, airlineAdmin.phone, airlineAdmin.username, airlineAdmin.adminID);
                         }
                     }
+                    Console.WriteLine("=======================================");
+                    Console.ResetColor();
                     break;
             }
         }
@@ -96,7 +122,10 @@ namespace Traveling_Services_Ticket_Booking
                     airlineAdmins++;
                 }
             }
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("=======================================\nSystem Report:\nTotal customers: {0}\nTotal hotel owners: {1}\nTotal hotels: {2}\nTotal taxi drivers: {3}\nTotal airline admins: {4}\nTotal flights: {5}\nHotel bookings: {6}\nTaxi bookings: {7}\nFlight bookings {8}\n=======================================",customers,hotelOwners,Hotel.hotels.Count,taxiDrivers,airlineAdmins,Flight.flights.Count,HotelBooking.hotelBookings.Count,TaxiBooking.taxiBookings.Count,FlightBooking.flightBookings.Count);
+            Console.ResetColor();
         }
     }
 }

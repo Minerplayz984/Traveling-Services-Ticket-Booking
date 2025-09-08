@@ -60,26 +60,41 @@ namespace Traveling_Services_Ticket_Booking
         }
         public void updateAvailability()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter your updated available time: ");
+            Console.ResetColor();
             taxi.availableTime= Console.ReadLine();
         }
         public void acceptBooking()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter booking ID to accept: ");
+            Console.ResetColor();
             string bookingID = Console.ReadLine();
             TaxiBooking taxiBooking = TaxiBooking.taxiBookings.Find(t => t.bookingID == bookingID);
             if(taxiBooking == null)
             {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Booking ID not found.");
+                Console.ResetColor();
                 return;
             }
             if (taxiBooking.taxi.taxiDriver != this)
             {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("You are not authorized to accept this booking !!");
+                Console.ResetColor();
                 return;
             }
             taxiBooking.status = "Accepted";
+            Console.Clear() ;
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Booking {0} accepted",taxiBooking.bookingID);
+            Console.ResetColor();
         }
     }
 }

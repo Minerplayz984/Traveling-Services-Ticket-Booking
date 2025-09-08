@@ -66,29 +66,45 @@ namespace Traveling_Services_Ticket_Booking
             this.customer = (Customer)customer;
             
             this.date = DateTime.Now;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Enter pickup location: ");
+            Console.ResetColor();
             this.pickupLocation = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Enter drop location: ");
+            Console.ResetColor();
             this.dropLocation = Console.ReadLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine("Enter pickup time (HH:MM): ");
+            Console.ResetColor();
             this.pickupTime = Console.ReadLine();
             if (this.taxi.taxiDriver.schedule.Contains(this.pickupTime))
             {
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Sorry, this driver is already booked at that time !!");
+                Console.ResetColor();
                 this.status = "Rejected (Driver unavailable)";
                 return;
             }
             this.taxi.taxiDriver.schedule.Add(this.pickupTime);
             this.status = "Confirmed";
             TaxiBooking.taxiBookings.Add(this);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Taxi booking confirmed with ID: {0}",this.bookingID);
+            Console.ResetColor();
         }
         public override void cancelBooking(Person customer)
         {
             this.status = "Cancelled";
             this.taxi.taxiDriver.schedule.Remove(this.pickupTime);
             TaxiBooking.taxiBookings.Remove(this);
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Taxi booking with ID: {0} was successfully cancelled",this.bookingID);
+            Console.ResetColor();
         }
     }
 }
