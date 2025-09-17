@@ -112,7 +112,6 @@ namespace Traveling_Services_Ticket_Booking
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter flight ID: ");
-            Console.Clear();
             string id = Console.ReadLine();
             Flight flight = flights.Find(f => f.flightID == id);
             if (flight == null)
